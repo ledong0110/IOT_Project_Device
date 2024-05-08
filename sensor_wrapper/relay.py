@@ -25,4 +25,5 @@ class Relay(RS485):
         self._send(msg)
         val = self._read()
         print(val)
+        print(val == self.on_value)
         return val == self.on_value
