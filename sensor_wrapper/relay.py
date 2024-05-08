@@ -1,5 +1,7 @@
 from .rs485 import RS485
 from .constants import READ_HOLDING_REGISTERS, WRITE_SINGLE_REGISTER
+import time
+
 class Relay(RS485):
     def __init__(self, serial, id, register_address=0, on_value=255, off_value=0):
         super().__init__(serial, id)
@@ -9,7 +11,10 @@ class Relay(RS485):
     
     def on(self):
         msg = self._generate_bytearray(WRITE_SINGLE_REGISTER, self.register_address, self.on_value)
-        self._send(msg)
+        self.serial.write(msg)
+        time.sleep(1)
+                
+        # self._send(msg)
         # self._read()
     
     def off(self):

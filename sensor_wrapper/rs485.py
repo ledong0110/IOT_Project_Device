@@ -14,7 +14,7 @@ class RS485:
         
     def _send(self, data: List):
         if len(data) < 7:
-            raise ValueError("Data must be 7 bytes long")
+            raise ValueError("Data be larger than 7 bytes long")
         self.serial.write(data)
         time.sleep(1)
 
