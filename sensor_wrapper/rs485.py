@@ -12,7 +12,7 @@ class RS485:
         return  array_data + calculate_crc16(array_data)
         
     def _send(self, data: List):
-        if len(data) != 7:
+        if len(data) < 7:
             raise ValueError("Data must be 7 bytes long")
         self.serial.write(data)
 
