@@ -46,7 +46,7 @@ def serial_read_data(ser):
 
 while True:
     relay1.on()
-    print("Is on: ", relay1.get_state() == 255)
+    print("Is on: ", relay1.get_state())
     time.sleep(2)
     relay1.off()
     print("Is off: ", relay1.get_state() == 0)

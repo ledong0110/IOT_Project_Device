@@ -23,7 +23,4 @@ class Relay(RS485):
         self._read()
         msg = self._generate_bytearray(READ_HOLDING_REGISTERS, self.register_address, 1)        
         self._send(msg)
-        val = self._read()
-        print(val)
-        print(val == self.on_value)
-        return val == self.on_value
+        return self._read() == self.on_value
