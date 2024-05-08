@@ -46,10 +46,10 @@ def serial_read_data(ser):
 
 while True:
     relay1.on()
-    print("Is on: ", relay1.get_state())
+    print("Is on: ", serial_read_data(ser) == 255)
     time.sleep(2)
     relay1.off()
-    print("Is off: ", relay1.get_state() == 0)
+    print("Is off: ", serial_read_data(ser) == 0)
     time.sleep(2)
 
 
