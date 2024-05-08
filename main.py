@@ -22,7 +22,7 @@ print(portName)
 
 
 try:
-    ser = serial.Serial(port=portName, baudrate=115200)
+    ser = serial.Serial(port=portName, baudrate=9600)
     print("Open successfully")
 except:
     print("Can not open the port")
@@ -46,10 +46,10 @@ def serial_read_data(ser):
 
 while True:
     relay1.on()
-    print("Is on: ", serial_read_data(ser) == 255)
+    print("Is on: ", relay1.get_state() == 255)
     time.sleep(2)
     relay1.off()
-    print("Is off: ", serial_read_data(ser) == 0)
+    print("Is off: ", relay1.get_state() == 0)
     time.sleep(2)
 
 

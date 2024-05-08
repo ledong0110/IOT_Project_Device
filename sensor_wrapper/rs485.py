@@ -23,7 +23,7 @@ class RS485:
         if bytesToRead > 0:
             out = self.serial.read(bytesToRead)
             data_array = [b for b in out]
-            print(data_array)
+            # print(data_array)
             if len(data_array) >= 7:
                 array_size = len(data_array)
                 value = data_array[array_size - 4] * 256 + data_array[array_size - 3]
@@ -31,5 +31,5 @@ class RS485:
             else:
                 return -1
         print("No data to read")
-        return 0
+        return -2
    

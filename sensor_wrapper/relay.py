@@ -11,16 +11,13 @@ class Relay(RS485):
     
     def on(self):
         msg = self._generate_bytearray(WRITE_SINGLE_REGISTER, self.register_address, self.on_value)
-        self.serial.write(msg)
-        time.sleep(1)
-                
-        # self._send(msg)
-        # self._read()
+        self._send(msg)
+        self._read()
     
     def off(self):
         msg = self._generate_bytearray(WRITE_SINGLE_REGISTER, self.register_address, self.off_value)
         self._send(msg)
-        # self._read()
+        self._read()
     
     def get_state(self):
         self._read()
