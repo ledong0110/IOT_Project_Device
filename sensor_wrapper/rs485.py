@@ -15,6 +15,7 @@ class RS485:
         if len(data) < 7:
             raise ValueError("Data must be 7 bytes long")
         self.serial.write(data)
+        time.sleep(0.8)
 
     def _read(self):
         bytesToRead = self.serial.inWaiting()
