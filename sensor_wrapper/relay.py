@@ -2,7 +2,7 @@ from .rs485 import RS485
 from .constants import READ_HOLDING_REGISTERS, WRITE_SINGLE_REGISTER
 class Relay(RS485):
     def __init__(self, serial, id, register_address=0, on_value=255, off_value=0):
-        super().__init__(self, serial, id)
+        super().__init__(serial, id)
         self.on_value = on_value
         self.off_value = off_value
         self.register_address = register_address
