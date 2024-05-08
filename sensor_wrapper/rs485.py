@@ -17,9 +17,9 @@ class RS485:
         self.serial.write(data)
 
     def _read(self):
-        bytesToRead = ser.inWaiting()
+        bytesToRead = self.serial.inWaiting()
         if bytesToRead > 0:
-            out = ser.read(bytesToRead)
+            out = self.serial.read(bytesToRead)
             data_array = [b for b in out]
             print(data_array)
             if len(data_array) >= 7:
