@@ -9,7 +9,7 @@ class RS485:
     
     def _generate_bytearray(self, operation: int, register_address: int, data: int):
         array_data = [self.id, operation, register_address >> 8, register_address & 0xFF, data >> 8, data & 0xFF]
-        return  array_data + calculate_crc16(array_data)
+        return  calculate_crc16(array_data)
         
     def _send(self, data: List):
         if len(data) < 7:
@@ -17,15 +17,17 @@ class RS485:
         self.serial.write(data)
 
     def _read(self):
-        bytesToRead = self.serial.inWaiting()
-        if bytesToRead == 0:
-            return 0
-        data = self.serial.read(bytesToRead)
-        dataArray = list(data)
-        if len(dataArray) >= 7:
-            array_size = len(dataArray)
-            value = dataArray[array_size - 4] * 256 + dataArray[array_size - 3]
-            return value
-        else:
-            return -1
+        bytesToRead = ser.inWaiting()
+        if bytesToRead > 0:
+            out = ser.read(bytesToRead)
+            data_array = [b for b in out]
+            print(data_array)
+            if len(data_array) >= 7:
+                array_size = len(data_array)
+                value = data_array[array_size - 4] * 256 + data_array[array_size - 3]
+                return value
+            else:
+                return -1
+        print("No data to read")
+        return 0
    
