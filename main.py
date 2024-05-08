@@ -37,8 +37,8 @@ relay1 = Relay(serial=ser, id=2, register_address=0, on_value=255, off_value=0)
 #     print("Is off: ", relay1.get_state() == 0)
 #     time.sleep(2)
 
-soil_temperature_sensor = Sensor(serial=ser, id=3, register_address=6)
-soil_moisture_sensor = Sensor(serial=ser, id=3, register_address=7)
+soil_temperature_sensor = Sensor(serial=ser, id=1, register_address=6)
+soil_moisture_sensor = Sensor(serial=ser, id=1, register_address=7)
 
 
 while True:
