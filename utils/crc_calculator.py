@@ -12,6 +12,6 @@ def calculate_crc16(data):
 
 if __name__ == '__main__':
     # Test the function
-    data = [0, 6, 0, 0, 0, 255]
+    data = [2, 6, 0, 0, 0, 255]
     crc = calculate_crc16(data)
     print(crc)
