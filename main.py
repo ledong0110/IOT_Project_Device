@@ -1,7 +1,7 @@
 import time
 import serial
 import serial.tools.list_ports
-from sensor_wrapper import Relay, Sensor
+from device_wrapper import Relay, Sensor
 
 def getPort():
     ports = serial.tools.list_ports.comports()
