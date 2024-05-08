@@ -1,4 +1,5 @@
 import time
+import serial
 import serial.tools.list_ports
 from sensor_wrapper import Relay, Sensor
 

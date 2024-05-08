@@ -1,8 +1,8 @@
 from typing import List
 from serial import Serial
-from ..utils import calculate_crc16
+from utils import calculate_crc16
 
-class Rs485Device:
+class RS485:
     def __init__(self, serial: Serial, id: int):
         self.serial = serial
         self.id = id
