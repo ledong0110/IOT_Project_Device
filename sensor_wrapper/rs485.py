@@ -1,3 +1,4 @@
+import time
 from typing import List
 from serial import Serial
 from utils import calculate_crc16
@@ -15,7 +16,7 @@ class RS485:
         if len(data) < 7:
             raise ValueError("Data must be 7 bytes long")
         self.serial.write(data)
-        time.sleep(0.8)
+        time.sleep(1)
 
     def _read(self):
         bytesToRead = self.serial.inWaiting()

@@ -19,6 +19,6 @@ class Relay(RS485):
     
     def get_state(self):
         self._read()
-        msg = self._generate_bytearray(READ_HOLDING_REGISTERS, self.register_address, 1)
+        msg = self._generate_bytearray(READ_HOLDING_REGISTERS, self.register_address, 1)        
         self._send(msg)
         return self._read() == self.on_value
