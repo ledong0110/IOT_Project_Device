@@ -1,49 +1,38 @@
 import time
+from pytz import utc
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
+from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
 import serial
 import serial.tools.list_ports
 from device_wrapper import Relay, Sensor
+from dotenv import load_dotenv
+import json
+from pipelines.general_pipeline import GeneralPipeline
 
-def getPort():
-    ports = serial.tools.list_ports.comports()
-    N = len(ports)
-    commPort = "None"
-    for i in range(0, N):
-        port = ports[i]
-        strPort = str(port)
-        if "USB" in strPort:
-            splitPort = strPort.split(" ")
-            commPort = (splitPort[0])
-    return commPort
-    # return "/dev/ttyUSB1"
+load_dotenv()
 
-portName = "/dev/ttyUSB0"
-print(portName)
+jobstores = {"default": SQLAlchemyJobStore(url="sqlite:///database/jobs.sqlite")}
+executors = {"default": ThreadPoolExecutor(10), "processpool": ProcessPoolExecutor(3)}
+job_defaults = {"coalesce": False, "max_instances": 2}
+scheduler = BackgroundScheduler(
+    jobstores=jobstores,
+    executors=executors,
+    job_defaults=job_defaults,
+    timezone="Asia/Ho_Chi_Minh",
+)
 
+with open("system_config.json") as f:
+    system_config = json.load(f)
 
+portName = system_config["port"]
+baundrate = system_config["baudrate"]
 
 try:
-    ser = serial.Serial(port=portName, baudrate=9600)
+    ser = serial.Serial(port=portName, baudrate=baundrate)
     print("Open successfully")
 except:
     print("Can not open the port")
 
-relay1 = Relay(serial=ser, id=2, register_address=0, on_value=255, off_value=0)
-
-# while True:
-#     relay1.on()
-#     print("Is on: ", relay1.get_state())
-#     time.sleep(2)
-#     relay1.off()
-#     print("Is off: ", relay1.get_state() == 0)
-#     time.sleep(2)
-
-soil_temperature_sensor = Sensor(serial=ser, id=1, register_address=6)
-soil_moisture_sensor = Sensor(serial=ser, id=1, register_address=7)
-
-
-while True:
-    print("TEST SENSOR")
-    print("Soil temperature: ", soil_temperature_sensor.read())
-    time.sleep(1)
-    print("Soil moisture: ", soil_moisture_sensor.read())
-    time.sleep(1)
+pipeline = GeneralPipeline(scheduler, system_config)
+pipeline.run()

@@ -8,9 +8,10 @@ def calculate_crc16(data):
                 crc ^= 0xA001
             else:
                 crc >>= 1
-    return data+[crc & 0xFF, (crc >> 8) & 0xFF]
+    return data + [crc & 0xFF, (crc >> 8) & 0xFF]
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     # Test the function
     data = [2, 6, 0, 0, 0, 255]
     crc = calculate_crc16(data)
