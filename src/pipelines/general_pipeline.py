@@ -58,20 +58,19 @@ class GeneralPipeline:
     ):
         self.config = config
         self.serial = ser
-        self.sensors = self.extract_sensors(config)
-        print({sensor.get_name(): sensor.read() for sensor in self.sensors})
-        self.actuators = self.extract_actuators(config)
+        self.extract_sensors(config)
+        # print({sensor.get_name(): sensor.read() for sensor in self.sensors})
+        self.extract_actuators(config)
         self.mqtt_client = glob_var.mqtt_client
         self.scheduler = scheduler
 
     def setup_jobs(self):
-        self.mqtt_client.addCallbackFn(mqtt_handler(self.actuators, self.scheduler))
+        self.mqtt_client.addCallbackFn(mqtt_handler(list_actuators, self.scheduler))
         self.scheduler.add_job(
             read_sensors,
             "interval",
             args=[
                 self.config["device_feed"],
-                self.sensors + self.actuators,
             ],
             seconds=0.5,
         )
@@ -88,7 +87,7 @@ class GeneralPipeline:
                     register_address=d["register_address"],
                 )
                 list_device.append(sensor)
-        return list_device
+        glob_var.list_sensors.extend(list_device)
 
     def extract_actuators(self, config: Dict):
         list_device = []
@@ -104,7 +103,7 @@ class GeneralPipeline:
                     off_value=d["off_value"],
                 )
                 list_device.append(actuator)
-        return list_device
+        glob_var.list_actuators.extend(list_device)
 
     def run(self):
         self.setup_jobs()
