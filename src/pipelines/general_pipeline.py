@@ -69,7 +69,6 @@ class GeneralPipeline:
             read_sensors,
             "interval",
             args=[
-                
                 self.config["device_feed"],
                 self.sensors + self.actuators,
             ],

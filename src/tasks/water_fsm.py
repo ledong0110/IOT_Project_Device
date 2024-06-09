@@ -6,7 +6,7 @@ from ..repository import TaskAction
 from ..config.constants import IDLE, MIXER, PUMP_IN, SELECTOR, PUMP_OUT
 
 
-def water_fsm(actuators: List[Relay], task: TaskAction, mqtt_client: AdafruitConnector):
+def water_fsm(actuators: List[Relay], task: TaskAction):
 
     count = 0
     state = IDLE
