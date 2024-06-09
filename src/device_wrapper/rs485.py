@@ -1,7 +1,7 @@
 import time
 from typing import List
 from serial import Serial
-from utils import calculate_crc16
+from ..utils import calculate_crc16
 
 
 class RS485:
