@@ -2,6 +2,7 @@ from typing import Dict
 from apscheduler.schedulers.background import BackgroundScheduler
 import datetime
 import serial
+from ..config import glob_var
 from ..device_wrapper import Relay, Sensor
 from ..connector import AdafruitConnector
 from ..tasks import read_sensors, water_fsm
@@ -27,7 +28,7 @@ def time_processing(task: TaskAction):
 
 
 def mqtt_handler(
-    actuators: Relay, scheduler: BackgroundScheduler, mqtt_client: AdafruitConnector
+    actuators: Relay, scheduler: BackgroundScheduler
 ):
     def handler(feed_id, payload):
         if feed_id == "task_action":
@@ -37,7 +38,7 @@ def mqtt_handler(
             scheduler.add_job(
                 water_fsm,
                 "cron",
-                args=[actuators, task, mqtt_client],
+                args=[actuators, task],
                 id=task.task_id,
                 **processed_time
             )
@@ -53,22 +54,22 @@ def mqtt_handler(
 
 class GeneralPipeline:
     def __init__(
-        self, ser: serial.Serial, scheduler: BackgroundScheduler, mqtt_client: AdafruitConnector, config: Dict
+        self, ser: serial.Serial, scheduler: BackgroundScheduler, config: Dict
     ):
         self.config = config
         self.serial = ser
         self.sensors = self.extract_sensors(config)
         self.actuators = self.extract_actuators(config)
-        self.mqtt_client = mqtt_client
+        self.mqtt_client = glob_var.mqtt_client
         self.scheduler = scheduler
 
     def setup_jobs(self):
-        self.mqtt_client.addCallbackFn(mqtt_handler(self.actuators, self.scheduler, self.mqtt_client))
+        self.mqtt_client.addCallbackFn(mqtt_handler(self.actuators, self.scheduler))
         self.scheduler.add_job(
             read_sensors,
             "interval",
             args=[
-                self.mqtt_client,
+                
                 self.config["device_feed"],
                 self.sensors + self.actuators,
             ],
