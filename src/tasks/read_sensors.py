@@ -1,6 +1,6 @@
 from typing import List
-from device_wrapper import RS485
-from connector import AdafruitConnector
+from ..device_wrapper import RS485
+from ..connector import AdafruitConnector
 import json
 
 

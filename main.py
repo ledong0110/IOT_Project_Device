@@ -5,10 +5,10 @@ from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
 import serial
 import serial.tools.list_ports
-from device_wrapper import Relay, Sensor
+from src.device_wrapper import Relay, Sensor
 from dotenv import load_dotenv
 import json
-from pipelines.general_pipeline import GeneralPipeline
+from src.pipelines.general_pipeline import GeneralPipeline
 
 load_dotenv()
 
