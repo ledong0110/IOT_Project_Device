@@ -39,8 +39,8 @@ class AdafruitConnector:
 
     def __init__(
         self,
-        username=os.Getenv("Adafruit_Username"),
-        key=os.Getenv("Adafruit_Key"),
+        username=os.getenv("Adafruit_Username"),
+        key=os.getenv("Adafruit_Key"),
         feed_ids=[],
     ):
         self.AIO_USERNAME = username
