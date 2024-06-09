@@ -1,13 +1,13 @@
 import sys
-from typing import List, String
+from typing import List
 from Adafruit_IO import MQTTClient
 import os
 
 
 class AdafruitConnector:
     AIO_FEED_IDs: List
-    AIO_USERNAME: String
-    AIO_KEY: String
+    AIO_USERNAME: str
+    AIO_KEY: str
 
     def connected(self, client):
         print("Connected ...")
