@@ -105,7 +105,7 @@ class GeneralPipeline:
                 list_device.append(actuator)
         return list_device
 
-    def run(self, data):
+    def run(self):
         self.setup_jobs()
         self.scheduler.start()
         print("IOT Service is running ...")
