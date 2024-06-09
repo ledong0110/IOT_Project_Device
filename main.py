@@ -6,6 +6,7 @@ from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
 import serial
 import serial.tools.list_ports
 from src.device_wrapper import Relay, Sensor
+from src.connector import AdafruitConnector
 from dotenv import load_dotenv
 import json
 from src.pipelines import GeneralPipeline
@@ -33,6 +34,6 @@ try:
     print("Open successfully")
 except:
     print("Can not open the port")
-
-pipeline = GeneralPipeline(ser, scheduler, system_config)
+mqtt_client = AdafruitConnector()
+pipeline = GeneralPipeline(ser, scheduler, mqtt_client, system_config)
 pipeline.run()
