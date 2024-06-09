@@ -53,8 +53,8 @@ def mqtt_handler(
 class GeneralPipeline:
     def __init__(self, scheduler: BackgroundScheduler, config: Dict):
         self.config = config
-        self.sensors = extract_sensors(config)
-        self.actuators = extract_actuators(config)
+        self.sensors = self.extract_sensors(config)
+        self.actuators = self.extract_actuators(config)
         self.serial = serial.Serial(port=config["port"], baudrate=config["baudrate"])
         self.mqtt_client = AdafruitConnector()
         self.scheduler = scheduler
