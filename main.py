@@ -9,8 +9,8 @@ from src.device_wrapper import Relay, Sensor
 from dotenv import load_dotenv
 import json
 from src.pipelines import GeneralPipeline
-from src.config import glob_var
 load_dotenv()
+from src.config import glob_var
 
 jobstores = {"default": SQLAlchemyJobStore(url="sqlite:///database/jobs.sqlite")}
 executors = {"default": ThreadPoolExecutor(10), "processpool": ProcessPoolExecutor(3)}
