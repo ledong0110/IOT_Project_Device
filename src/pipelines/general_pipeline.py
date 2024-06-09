@@ -28,7 +28,7 @@ def time_processing(task: TaskAction):
 
 
 def mqtt_handler(
-    actuators: Relay, scheduler: BackgroundScheduler
+    scheduler: BackgroundScheduler
 ):
     def handler(feed_id, payload):
         if feed_id == "task_action":
@@ -38,7 +38,7 @@ def mqtt_handler(
             scheduler.add_job(
                 water_fsm,
                 "cron",
-                args=[actuators, task],
+                args=[glob_var.list_actuators, task],
                 id=task.task_id,
                 **processed_time
             )
@@ -65,7 +65,7 @@ class GeneralPipeline:
         self.scheduler = scheduler
 
     def setup_jobs(self):
-        self.mqtt_client.addCallbackFn(mqtt_handler(list_actuators, self.scheduler))
+        self.mqtt_client.addCallbackFn(mqtt_handler(self.scheduler))
         self.scheduler.add_job(
             read_sensors,
             "interval",
