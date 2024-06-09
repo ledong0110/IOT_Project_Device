@@ -3,7 +3,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import datetime
 from ..device_wrapper import Relay, Sensor
 from ..connector import AdafruitConnector
-from ..tasks import read_sensors, watering_task
+from ..tasks import read_sensors, water_fsm
 from ..repository import TaskAction
 
 
@@ -34,7 +34,7 @@ def mqtt_handler(
             task(payload)
             processed_time = time_processing(task)
             scheduler.add_job(
-                watering_task,
+                water_fsm,
                 "cron",
                 args=[actuators, task, mqtt_client],
                 id=task.task_id,
