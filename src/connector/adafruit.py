@@ -45,7 +45,7 @@ class AdafruitConnector:
     ):
         self.AIO_USERNAME = username
         self.AIO_KEY = key
-        self.AIO_FEED_IDS = feed_ids
+        self.AIO_FEED_IDs = feed_ids
         self.callback_fns = []
         self.client = MQTTClient(self.AIO_USERNAME, self.AIO_KEY)
         self.client.on_connect = self.connected
