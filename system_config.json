@@ -7,49 +7,49 @@
 
     "devices": [
         {
-            "id": "1",
+            "id": 1,
             "area": 1,
             "name": "temp_area1",
             "type": "sensor",
             "register_address": 6
         },
         {
-            "id": "1",
+            "id": 1,
             "area": 2,
             "name": "temp_area2",
             "type": "sensor",
             "register_address": 6
         },
         {
-            "id": "1",
+            "id": 1,
             "area": 3,
             "name": "temp_area3",
             "type": "sensor",
             "register_address": 6
         },
         {
-            "id": "1",
+            "id": 1,
             "area": 1,
             "name": "moisture_area1",
             "type": "sensor",
             "register_address": 7
         },
         {
-            "id": "1",
+            "id": 1,
             "area": 2,
             "name": "moisture_area2",
             "type": "sensor",
             "register_address": 7
         },
         {
-            "id": "1",
+            "id": 1,
             "area": 3,
             "name": "moisture_area3",
             "type": "sensor",
             "register_address": 7
         },
         {
-            "id": "2",
+            "id": 2,
             "area": 0,
             "name": "Pump_in",
             "type": "actuator",
@@ -58,52 +58,52 @@
             "off_value": 0
         },
         {
-            "id": "2",
+            "id": 2,
             "area": 0,
             "name": "Pump_out",
             "type": "actuator",
-            "register_address": 0,
+            "register_address": 1,
             "on_value": 255,
             "off_value": 0
         },
         {
-            "id": "1",
+            "id": 1,
             "area": 1,
             "name": "Mixer1",
             "type": "actuator",
-            "register_address": 0,
+            "register_address": 2,
             "on_value": 255,
             "off_value": 0
         },
         {
-            "id": "2",
+            "id": 2,
             "area": 2,
             "name": "Mixer2",
             "type": "actuator",
-            "register_address": 0,
+            "register_address": 3,
             "on_value": 255,
             "off_value": 0
         },
         {
-            "id": "2",
+            "id": 2,
             "area": 3,
             "name": "Mixer3",
             "type": "actuator",
-            "register_address": 0,
+            "register_address": 4,
             "on_value": 255,
             "off_value": 0
         },
         {
-            "id": "1",
+            "id": 1,
             "area": 1,
             "name": "Selector1",
             "type": "actuator",
-            "register_address": 0,
+            "register_address": 4,
             "on_value": 255,
             "off_value": 0
         },
         {
-            "id": "2",
+            "id": 2,
             "area": 2,
             "name": "Selector2",
             "type": "actuator",
@@ -112,7 +112,7 @@
             "off_value": 0
         },
         {
-            "id": "2",
+            "id": 2,
             "area": 3,
             "name": "Selector3",
             "type": "actuator",

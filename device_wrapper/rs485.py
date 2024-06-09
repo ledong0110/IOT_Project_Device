@@ -12,7 +12,7 @@ class RS485:
         self.area = area
 
     def get_name(self):
-        return self.role
+        return self.name
 
     def _generate_bytearray(self, operation: int, register_address: int, data: int):
         array_data = [
