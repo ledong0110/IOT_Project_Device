@@ -1,3 +1,5 @@
 pyserial
 python-dotenv
 APScheduler
+Adafruit_IO
+sqlalchemy
