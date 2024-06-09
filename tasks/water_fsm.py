@@ -1,9 +1,9 @@
 from typing import List, String
 import random
-from ..device_wrapper import Sensor, Relay, RS485
-from ..connector import AdafruitConnector
-from ..repository import TaskAction
-from ..config.constants import IDLE, MIXER, PUMP_IN, SELECTOR, PUMP_OUT
+from device_wrapper import Sensor, Relay, RS485
+from connector import AdafruitConnector
+from repository import TaskAction
+from config.constants import IDLE, MIXER, PUMP_IN, SELECTOR, PUMP_OUT
 
 
 def water_fsm(actuators: List[Relay], task: TaskAction, mqtt_client: AdafruitConnector):
