@@ -69,7 +69,7 @@ class GeneralPipeline:
             "interval",
             args=[
                 self.mqtt_client,
-                config["device_feed"],
+                self.config["device_feed"],
                 self.sensors + self.actuators,
             ],
             seconds=0.5,
