@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 class TaskAction:
-    task_id: string
+    task_id: str
     M1: int
     M2: int
     M3: int
