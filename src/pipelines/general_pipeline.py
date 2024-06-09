@@ -63,7 +63,7 @@ class GeneralPipeline:
         self.scheduler = scheduler
 
     def setup_jobs(self):
-        self.mqtt_client.addCallbackFn(mqtt_handler(self.scheduler))
+        self.mqtt_client.addCallbackFn(mqtt_handler(self.actuators, self.scheduler, self.mqtt_client))
         self.scheduler.add_job(
             read_sensors,
             "interval",
