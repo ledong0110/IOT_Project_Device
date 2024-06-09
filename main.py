@@ -8,7 +8,7 @@ import serial.tools.list_ports
 from src.device_wrapper import Relay, Sensor
 from dotenv import load_dotenv
 import json
-from src.pipelines.general_pipeline import GeneralPipeline
+from src.pipelines import GeneralPipeline
 
 load_dotenv()
 
