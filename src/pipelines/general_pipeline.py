@@ -59,6 +59,7 @@ class GeneralPipeline:
         self.config = config
         self.serial = ser
         self.sensors = self.extract_sensors(config)
+        print({sensor.get_name(): sensor.read() for sensor in self.sensors})
         self.actuators = self.extract_actuators(config)
         self.mqtt_client = glob_var.mqtt_client
         self.scheduler = scheduler
