@@ -34,5 +34,5 @@ try:
 except:
     print("Can not open the port")
 
-pipeline = GeneralPipeline(scheduler, system_config)
+pipeline = GeneralPipeline(ser, scheduler, system_config)
 pipeline.run()

@@ -1,6 +1,7 @@
 from typing import Dict
 from apscheduler.schedulers.background import BackgroundScheduler
 import datetime
+import seria
 from ..device_wrapper import Relay, Sensor
 from ..connector import AdafruitConnector
 from ..tasks import read_sensors, water_fsm
@@ -51,9 +52,9 @@ def mqtt_handler(
 
 
 class GeneralPipeline:
-    def __init__(self, scheduler: BackgroundScheduler, config: Dict):
+    def __init__(self, ser: serial.Serial, scheduler: BackgroundScheduler, config: Dict):
         self.config = config
-        self.serial = serial.Serial(port=config["port"], baudrate=config["baudrate"])
+        self.serial = ser
         self.sensors = self.extract_sensors(config)
         self.actuators = self.extract_actuators(config)
         self.mqtt_client = AdafruitConnector()
