@@ -1,4 +1,4 @@
-from typing import List, String
+from typing import List
 import random
 from ..device_wrapper import Sensor, Relay, RS485
 from ..connector import AdafruitConnector
