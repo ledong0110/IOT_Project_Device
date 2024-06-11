@@ -2,6 +2,7 @@
 from datetime import datetime
 import json
 
+
 class TaskAction:
     task_id: str
     M1: int
@@ -17,8 +18,6 @@ class TaskAction:
     end_time: datetime
     repeat: int = None
 
-    
-    
     def __call__(self, data):
         data = json.loads(data)
         self.task_id = data["Task_id"]

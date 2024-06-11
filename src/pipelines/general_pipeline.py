@@ -50,7 +50,10 @@ def mqtt_handler(scheduler: BackgroundScheduler):
 
     return handler
 
+
 {"Task_id": 1, "start_time": "2021-09-01"}
+
+
 class GeneralPipeline:
     def __init__(
         self, ser: serial.Serial, scheduler: BackgroundScheduler, config: Dict
