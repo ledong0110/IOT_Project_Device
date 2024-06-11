@@ -17,7 +17,7 @@ def water_fsm(task: TaskAction):
     count = 0
     state = IDLE
     actuator = None
-    while state == DONE:
+    while state != DONE:
         if state == IDLE:
             logging.info("IDLE")
             state = MIXER1
