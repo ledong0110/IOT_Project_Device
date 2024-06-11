@@ -45,11 +45,11 @@ def mqtt_handler(scheduler: BackgroundScheduler):
         elif feed_id == "ledong0110/feeds/task-result-query":
             state = scheduler.get_job(payload["Task_id"]).state
             glob_var.mqtt_client.publish(
-                "ledong0110/feeds/task-result", {"Task_id": payload["Task_id"], "state": state}
+                "ledong0110/feeds/task-result",
+                {"Task_id": payload["Task_id"], "state": state},
             )
 
     return handler
-
 
 
 class GeneralPipeline:

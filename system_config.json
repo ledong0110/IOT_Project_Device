@@ -1,7 +1,7 @@
 {
     "port": "/dev/ttyUSB0",
     "baudrate": 9600,
-    "device_feed": "devices",
+    "device_feed": "sensors",
     "task_receiver": "task-action",
     "task_sender": "task-result",
 

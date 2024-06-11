@@ -12,11 +12,11 @@ class AdafruitConnector:
     def connected(self, client):
         print("Connected ...")
         for feed in self.AIO_FEED_IDs:
-            client.subscribe(f"{self.AIO_USERNAME}/feeds/{feed}")
+            client.subscribe(f"{feed}")
 
     def add_feed_id(self, feed_id):
         self.AIO_FEED_IDs.append(feed_id)
-        self.client.subscribe(f"{self.AIO_USERNAME}/feeds/{feed}")
+        self.client.subscribe(f"{feed}")
 
     def subscribe(self, client, userdata, mid, granted_qos):
         print("Subscribed...")
