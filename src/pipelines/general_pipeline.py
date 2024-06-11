@@ -27,7 +27,7 @@ def time_processing(task: TaskAction):
 
 def mqtt_handler(scheduler: BackgroundScheduler):
     def handler(feed_id, payload):
-        if feed_id == "ledong0110/feeds/task-action":
+        if feed_id == "task-action":
             task = TaskAction()
             task(payload)
             processed_time = time_processing(task)
@@ -39,13 +39,13 @@ def mqtt_handler(scheduler: BackgroundScheduler):
                 **processed_time
             )
             glob_var.mqtt_client.publish(
-                "ledong0110/feeds/task-result", {"Task_id": task.task_id, "state": 3}
+                "task-result", {"Task_id": task.task_id, "state": 3}
             )
 
-        elif feed_id == "ledong0110/feeds/task-result-query":
+        elif feed_id == "task-result-query":
             state = scheduler.get_job(payload["Task_id"]).state
             glob_var.mqtt_client.publish(
-                "ledong0110/feeds/task-result",
+                "task-result",
                 {"Task_id": payload["Task_id"], "state": state},
             )
 
