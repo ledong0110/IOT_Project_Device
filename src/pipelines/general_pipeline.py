@@ -20,8 +20,8 @@ def time_processing(task: TaskAction):
         "day_of_week": "mon-fri",
         "hour": task.hour,
         "minute": task.minute,
-        "start_date": task.start_time.strftime("%Y-%m-%d"),
-        "end_date": task.end_time.strftime("%Y-%m-%d"),
+        "start_date": task.start_time,
+        "end_date": task.end_time,
     }
 
 
