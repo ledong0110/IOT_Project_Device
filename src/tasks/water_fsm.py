@@ -7,6 +7,7 @@ from ..config.constants import IDLE, MIXER1, MIXER2, MIXER3, PUMP_IN, SELECTOR, 
 from ..config import glob_var
 import json
 import logging
+import time
 logging.basicConfig(filename='SchedulerLog.txt', level=logging.INFO)
 
 
@@ -105,6 +106,6 @@ def water_fsm(task: TaskAction):
                 state = DONE
         else:
             raise ValueError("Invalid state")
-
+        time.sleep(1)
         count -= 1
     glob_var.mqtt_client.publish("task_result", json.dumps({"Task_id": task.task_id, "state": 2}))
