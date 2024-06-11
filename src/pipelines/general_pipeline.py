@@ -2,6 +2,7 @@ from typing import Dict
 from apscheduler.schedulers.background import BackgroundScheduler
 import datetime
 import serial
+import json
 from ..config import glob_var
 from ..device_wrapper import Relay, Sensor
 from ..connector import AdafruitConnector
@@ -39,14 +40,14 @@ def mqtt_handler(scheduler: BackgroundScheduler):
                 **processed_time
             )
             glob_var.mqtt_client.publish(
-                "task-result", {"Task_id": task.task_id, "state": 3}
+                "task-result", json.dumps({"Task_id": task.task_id, "state": 3})
             )
 
         elif feed_id == "task-result-query":
             state = scheduler.get_job(payload["Task_id"]).state
             glob_var.mqtt_client.publish(
                 "task-result",
-                {"Task_id": payload["Task_id"], "state": state},
+                json.dumps({"Task_id": payload["Task_id"], "state": state}),
             )
 
     return handler

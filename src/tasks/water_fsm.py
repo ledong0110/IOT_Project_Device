@@ -5,10 +5,10 @@ from ..connector import AdafruitConnector
 from ..repository import TaskAction
 from ..config.constants import IDLE, MIXER, PUMP_IN, SELECTOR, PUMP_OUT
 from ..config import glob_var
-
+import json
 
 def water_fsm(task: TaskAction):
-    glob_var.mqtt_client.publish("task_result", {"Task_id": task.task_id, "state": 1})
+    glob_var.mqtt_client.publish("task_result", json.dumps({"Task_id": task.task_id, "state": 1}))
     actuators = glob_var.list_actuators
     count = 0
     state = IDLE
@@ -74,7 +74,7 @@ def water_fsm(task: TaskAction):
 
                 # print("Area selected: " + str(area_selected))
                 count = 3
-                publish_stage(client, schedule_id, cycle, state)
+                
 
             print("TimeProcess: " + str(count))
         elif state == SELECTOR:
@@ -104,4 +104,4 @@ def water_fsm(task: TaskAction):
             raise ValueError("Invalid state")
 
         count -= 1
-    glob_var.mqtt_client.publish("task_result", {"Task_id": task.task_id, "state": 2})
+    glob_var.mqtt_client.publish("task_result", json.dumps({"Task_id": task.task_id, "state": 2}))
