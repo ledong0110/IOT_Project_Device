@@ -26,7 +26,7 @@ scheduler = BackgroundScheduler(
 
 
 def listener(event):
-    glob_var.mqtt_client.publish("task_result", {"Task_id": event.job_id, "state": 0})
+    glob_var.mqtt_client.publish("task_result", json.dumps({"Task_id": event.job_id, "state": 0}))
 
 
 scheduler.add_listener(listener, EVENT_JOB_ERROR)
