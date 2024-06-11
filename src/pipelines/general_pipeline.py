@@ -29,7 +29,7 @@ def mqtt_handler(scheduler: BackgroundScheduler):
     def handler(feed_id, payload):
         if feed_id == "task-action":
             task = TaskAction()
-            task(payload)
+            task.parse(payload)
             processed_time = time_processing(task)
             scheduler.add_job(
                 water_fsm,

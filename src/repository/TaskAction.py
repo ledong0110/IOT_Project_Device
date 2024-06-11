@@ -4,21 +4,21 @@ import json
 
 
 class TaskAction:
-    task_id: str
-    M1: int
-    M2: int
-    M3: int
-    Area1: bool
-    Area2: bool
-    Area3: bool
+    task_id: str = ""
+    M1: int = None
+    M2: int = None
+    M3: int = None
+    Area1: bool = None
+    Area2: bool = None
+    Area3: bool = None
     state: int = 3
-    hour: int
-    minute: int
-    start_time: datetime
-    end_time: datetime
+    hour: int = None
+    minute: int = None
+    start_time: str = ""
+    end_time: str = ""
     repeat: int = None
 
-    def __call__(self, data):
+    def parse(self, data):
         data = json.loads(data)
         self.task_id = data["Task_id"]
         self.M1 = data["M1"]
