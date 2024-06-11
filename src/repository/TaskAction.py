@@ -18,6 +18,9 @@ class TaskAction:
     end_time: str = ""
     repeat: int = None
 
+    def __init__(self):
+        pass
+
     def parse(self, data):
         data = json.loads(data)
         self.task_id = data["Task_id"]
