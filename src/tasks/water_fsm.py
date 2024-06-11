@@ -3,7 +3,7 @@ import random
 from ..device_wrapper import Sensor, Relay, RS485
 from ..connector import AdafruitConnector
 from ..repository import TaskAction
-from ..config.constants import IDLE, MIXER, PUMP_IN, SELECTOR, PUMP_OUT
+from ..config.constants import IDLE, MIXER1, MIXER2, MIXER3, PUMP_IN, SELECTOR, PUMP_OUT, DONE
 from ..config import glob_var
 import json
 import logging
