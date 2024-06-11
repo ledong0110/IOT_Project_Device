@@ -18,18 +18,16 @@ def time_processing(task: TaskAction):
         # Additional parameters for repeat logic can be implemented here
         # APScheduler does not have a direct 'repeat' parameter, but you can use 'trigger' for repeating jobs
         "day_of_week": "mon-fri",
-        "hour": task.start_time.hour,
-        "minute": task.start_time.minute,
+        "hour": task.hour,
+        "minute": task.minute,
         "start_date": task.start_time.strftime("%Y-%m-%d"),
-        "end_date": (
-            task.start_time + datetime.timedelta(days=task.repeat * 7)
-        ).strftime("%Y-%m-%d"),
+        "end_date": task.end_time.strftime("%Y-%m-%d"),
     }
 
 
 def mqtt_handler(scheduler: BackgroundScheduler):
     def handler(feed_id, payload):
-        if feed_id == "task_action":
+        if feed_id == "task-action":
             task = TaskAction()
             task(payload)
             processed_time = time_processing(task)
@@ -41,18 +39,18 @@ def mqtt_handler(scheduler: BackgroundScheduler):
                 **processed_time
             )
             glob_var.mqtt_client.publish(
-                "task_result", {"Task_id": task.task_id, "state": 3}
+                "task-result", {"Task_id": task.task_id, "state": 3}
             )
 
-        elif feed_id == "task_result_query":
+        elif feed_id == "task-result-query":
             state = scheduler.get_job(payload["Task_id"]).state
             glob_var.mqtt_client.publish(
-                "task_result", {"Task_id": payload["Task_id"], "state": state}
+                "task-result", {"Task_id": payload["Task_id"], "state": state}
             )
 
     return handler
 
-
+{"Task_id": 1, "start_time": "2021-09-01"}
 class GeneralPipeline:
     def __init__(
         self, ser: serial.Serial, scheduler: BackgroundScheduler, config: Dict
