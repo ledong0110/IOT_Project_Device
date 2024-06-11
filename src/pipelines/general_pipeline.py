@@ -35,7 +35,7 @@ def mqtt_handler(scheduler: BackgroundScheduler):
                 water_fsm,
                 "cron",
                 args=[glob_var.list_actuators, task],
-                id=task.task_id,
+                id=f"{task.task_id}",
                 **processed_time
             )
             glob_var.mqtt_client.publish(
