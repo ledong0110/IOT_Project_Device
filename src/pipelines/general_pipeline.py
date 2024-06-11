@@ -27,9 +27,7 @@ def time_processing(task: TaskAction):
     }
 
 
-def mqtt_handler(
-    scheduler: BackgroundScheduler
-):
+def mqtt_handler(scheduler: BackgroundScheduler):
     def handler(feed_id, payload):
         if feed_id == "task_action":
             task = TaskAction()
@@ -42,10 +40,13 @@ def mqtt_handler(
                 id=task.task_id,
                 **processed_time
             )
+            glob_var.mqtt_client.publish(
+                "task_result", {"Task_id": task.task_id, "state": 3}
+            )
 
         elif feed_id == "task_result_query":
             state = scheduler.get_job(payload["Task_id"]).state
-            client.publish(
+            glob_var.mqtt_client.publish(
                 "task_result", {"Task_id": payload["Task_id"], "state": state}
             )
 
@@ -72,7 +73,7 @@ class GeneralPipeline:
             args=[
                 self.config["device_feed"],
             ],
-            seconds=0.5,
+            seconds=5,
         )
 
     def extract_sensors(self, config: Dict):
