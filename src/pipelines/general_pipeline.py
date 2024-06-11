@@ -34,7 +34,7 @@ def mqtt_handler(scheduler: BackgroundScheduler):
             scheduler.add_job(
                 water_fsm,
                 "cron",
-                args=[glob_var.list_actuators, task],
+                args=[task],
                 id=f"{task.task_id}",
                 **processed_time
             )
